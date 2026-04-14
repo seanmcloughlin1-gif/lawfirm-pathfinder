@@ -19,6 +19,13 @@ export function Header() {
             Directory
           </Link>
           <Link
+            to="/staff-careers"
+            activeProps={{ className: "text-foreground font-medium" }}
+            inactiveProps={{ className: "text-muted-foreground hover:text-foreground transition-colors" }}
+          >
+            Staff Careers
+          </Link>
+          <Link
             to="/about"
             activeProps={{ className: "text-foreground font-medium" }}
             inactiveProps={{ className: "text-muted-foreground hover:text-foreground transition-colors" }}
