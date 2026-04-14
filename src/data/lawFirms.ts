@@ -6,6 +6,8 @@ export interface LawFirm {
   attorneys: number;
   practiceAreas: string[];
   careersUrl: string;
+  staffCareersUrl?: string;
+  staffRoles?: string[];
 }
 
 export const lawFirms: LawFirm[] = [
