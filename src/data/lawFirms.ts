@@ -165,3 +165,5 @@ export const lawFirms: LawFirm[] = [
 
 export const allStates = [...new Set(lawFirms.map((f) => f.state))].sort();
 export const allPracticeAreas = [...new Set(lawFirms.flatMap((f) => f.practiceAreas))].sort();
+export const allStaffRoles = [...new Set(lawFirms.flatMap((f) => f.staffRoles ?? []))].sort();
+export const firmsWithStaffCareers = lawFirms.filter((f) => f.staffCareersUrl);
