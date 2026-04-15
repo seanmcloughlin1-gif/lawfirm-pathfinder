@@ -16,10 +16,10 @@ export const Route = createFileRoute("/jobs/")({
       { property: "og:description", content: "Search JD-advantage and legal professional jobs." },
     ],
   }),
-  validateSearch: (search: Record<string, unknown>) => ({
-    q: (search.q as string) ?? "",
-    category: (search.category as string) ?? "",
-  } as { q?: string; category?: string }),
+  validateSearch: (search: Record<string, unknown>): { q?: string; category?: string } => ({
+    q: (search.q as string) || undefined,
+    category: (search.category as string) || undefined,
+  }),
   component: JobsPage,
 });
 
