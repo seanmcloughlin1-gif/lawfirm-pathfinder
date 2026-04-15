@@ -1,12 +1,13 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
+        <h1 className="font-heading text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
@@ -29,12 +30,15 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "LawCareers150 — Top US Law Firm Career Pages" },
-      { name: "description", content: "Browse career pages for the top 150 US law firms." },
+      { title: "JD Careers — Non-Practicing Attorney & Legal Professional Jobs" },
+      { name: "description", content: "The niche job board for JD-advantage roles, legal operations, compliance, legal tech, and law firm business professionals." },
       { name: "twitter:card", content: "summary" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" as const },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Inter:wght@400;500;600&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -58,9 +62,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <Outlet />
-    </>
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
   );
 }
