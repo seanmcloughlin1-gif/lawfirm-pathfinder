@@ -17,9 +17,9 @@ export const Route = createFileRoute("/jobs/")({
     ],
   }),
   validateSearch: (search: Record<string, unknown>) => ({
-    q: (search.q as string) || "",
-    category: (search.category as string) || "",
-  }),
+    q: (search.q as string) ?? "",
+    category: (search.category as string) ?? "",
+  } as { q?: string; category?: string }),
   component: JobsPage,
 });
 
