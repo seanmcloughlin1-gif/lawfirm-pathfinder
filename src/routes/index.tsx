@@ -1,82 +1,163 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useMemo } from "react";
-import { lawFirms, allStates } from "@/data/lawFirms";
-import { FirmCard } from "@/components/FirmCard";
-import { SearchFilters } from "@/components/SearchFilters";
+import { Search, ArrowRight } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { JobCard } from "@/components/JobCard";
+import { EmployerCard } from "@/components/EmployerCard";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { categories } from "@/data/categories";
+import { featuredJobs, recentJobs } from "@/data/jobs";
+import { featuredEmployers } from "@/data/employers";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Top 150 US Law Firm Careers — LawCareers150" },
-      { name: "description", content: "Browse career pages for the top 150 US law firms ranked by Am Law 200. Search by name, state, or firm size." },
-      { property: "og:title", content: "Top 150 US Law Firm Careers — LawCareers150" },
-      { property: "og:description", content: "Browse career pages for the top 150 US law firms ranked by Am Law 200." },
+      { title: "JD Careers — Non-Practicing Attorney & Legal Professional Jobs" },
+      { name: "description", content: "The niche job board for JD-advantage roles, legal operations, compliance, legal tech, and law firm business professional positions." },
+      { property: "og:title", content: "JD Careers — Non-Practicing Attorney & Legal Professional Jobs" },
+      { property: "og:description", content: "Find JD-advantage roles, legal ops, compliance, legal tech, and law firm business professional jobs." },
     ],
   }),
-  component: Index,
+  component: HomePage,
 });
 
-function Index() {
-  const [search, setSearch] = useState("");
-  const [stateFilter, setStateFilter] = useState("all");
-  const [sizeFilter, setSizeFilter] = useState("all");
-  const [sort, setSort] = useState("rank");
-
-  const filtered = useMemo(() => {
-    let results = lawFirms.filter((f) => {
-      const matchesSearch = f.name.toLowerCase().includes(search.toLowerCase());
-      const matchesState = stateFilter === "all" || f.state === stateFilter;
-      const matchesSize = sizeFilter === "all" || f.attorneys >= Number(sizeFilter);
-      return matchesSearch && matchesState && matchesSize;
-    });
-
-    if (sort === "name") results.sort((a, b) => a.name.localeCompare(b.name));
-    else if (sort === "size") results.sort((a, b) => b.attorneys - a.attorneys);
-    else results.sort((a, b) => a.rank - b.rank);
-
-    return results;
-  }, [search, stateFilter, sizeFilter, sort]);
+function HomePage() {
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Top 150 US Law Firm Careers
-        </h1>
-        <p className="mt-2 text-muted-foreground">
-          Find career opportunities at America's leading law firms, ranked by the Am Law 200.
-        </p>
-      </div>
-
-      <div className="mb-6">
-        <SearchFilters
-          search={search}
-          onSearchChange={setSearch}
-          state={stateFilter}
-          onStateChange={setStateFilter}
-          size={sizeFilter}
-          onSizeChange={setSizeFilter}
-          sort={sort}
-          onSortChange={setSort}
-          states={allStates}
-        />
-      </div>
-
-      <p className="mb-4 text-sm text-muted-foreground">
-        Showing {filtered.length} of {lawFirms.length} firms
-      </p>
-
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((firm) => (
-          <FirmCard key={firm.rank} firm={firm} />
-        ))}
-      </div>
-
-      {filtered.length === 0 && (
-        <div className="py-16 text-center text-muted-foreground">
-          No firms match your filters. Try adjusting your search.
+    <div>
+      {/* Hero */}
+      <section className="bg-hero-bg px-4 py-20 text-center sm:py-28">
+        <div className="mx-auto max-w-3xl">
+          <Badge className="mb-4 border-0 bg-primary/20 text-primary-foreground/80 text-xs">For JD-Advantage & Legal Business Professionals</Badge>
+          <h1 className="font-heading text-4xl font-bold tracking-tight text-hero-foreground sm:text-5xl lg:text-6xl">
+            Your law degree opens more doors than you think
+          </h1>
+          <p className="mt-4 text-lg text-hero-muted sm:text-xl">
+            Curated roles for non-practicing attorneys, legal operations leaders, compliance professionals, knowledge managers, and legal tech innovators.
+          </p>
+          <form
+            className="mx-auto mt-8 flex max-w-xl gap-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                placeholder="Job title, keyword, or employer…"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="h-11 bg-background pl-10"
+              />
+            </div>
+            <Link to="/jobs" search={{ q: searchQuery || undefined }}>
+              <Button size="lg" className="h-11">Search Jobs</Button>
+            </Link>
+          </form>
         </div>
-      )}
+      </section>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        {/* Categories */}
+        <section className="py-16">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="font-heading text-2xl font-bold">Browse by Category</h2>
+              <p className="mt-1 text-sm text-muted-foreground">Find roles aligned with your expertise</p>
+            </div>
+            <Link to="/jobs" className="hidden items-center gap-1 text-sm font-medium text-primary hover:underline sm:flex">
+              All categories <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {categories.map((cat) => {
+              const Icon = cat.icon;
+              return (
+                <Link key={cat.id} to="/jobs" search={{ category: cat.id }}>
+                  <Card className="group cursor-pointer transition-all hover:border-primary/30 hover:shadow-md">
+                    <CardContent className="flex items-center gap-4 p-4">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-sm font-semibold">{cat.name}</p>
+                        <p className="text-xs text-muted-foreground">{cat.jobCount} positions</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Featured Jobs */}
+        <section className="pb-16">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="font-heading text-2xl font-bold">Featured Jobs</h2>
+              <p className="mt-1 text-sm text-muted-foreground">Hand-picked opportunities from top employers</p>
+            </div>
+            <Link to="/jobs" className="hidden items-center gap-1 text-sm font-medium text-primary hover:underline sm:flex">
+              View all jobs <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredJobs.slice(0, 6).map((job) => (
+              <JobCard key={job.id} job={job} />
+            ))}
+          </div>
+        </section>
+
+        {/* Featured Employers */}
+        <section className="pb-16">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="font-heading text-2xl font-bold">Featured Employers</h2>
+              <p className="mt-1 text-sm text-muted-foreground">Leading organizations hiring legal professionals</p>
+            </div>
+            <Link to="/employers" className="hidden items-center gap-1 text-sm font-medium text-primary hover:underline sm:flex">
+              View all employers <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredEmployers.slice(0, 6).map((emp) => (
+              <EmployerCard key={emp.id} employer={emp} />
+            ))}
+          </div>
+        </section>
+
+        {/* Recent Jobs */}
+        <section className="pb-16">
+          <h2 className="font-heading text-2xl font-bold">Recently Posted</h2>
+          <p className="mt-1 text-sm text-muted-foreground">The latest openings across our network</p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {recentJobs.map((job) => (
+              <JobCard key={job.id} job={job} />
+            ))}
+          </div>
+        </section>
+
+        {/* Newsletter */}
+        <section className="pb-16">
+          <NewsletterSignup />
+        </section>
+
+        {/* Employer CTA */}
+        <section className="pb-16">
+          <div className="rounded-xl bg-hero-bg p-8 text-center sm:p-12">
+            <h2 className="font-heading text-2xl font-bold text-hero-foreground sm:text-3xl">Hiring Legal Professionals?</h2>
+            <p className="mx-auto mt-2 max-w-lg text-hero-muted">Reach thousands of JD-holders and legal business professionals. Post your roles on the board built for your niche.</p>
+            <Link to="/contact">
+              <Button size="lg" className="mt-6">Contact Us to Post Jobs</Button>
+            </Link>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
