@@ -79,7 +79,7 @@ function DashboardPage() {
           <div className="py-12 text-center text-muted-foreground">
             <Bookmark className="mx-auto h-8 w-8 mb-2" />
             <p>No saved jobs yet.</p>
-            <Link to="/jobs"><Button variant="outline" className="mt-3">Browse Jobs</Button></Link>
+            <Link to="/jobs" search={{} as any}><Button variant="outline" className="mt-3">Browse Jobs</Button></Link>
           </div>
         )}
       </div>

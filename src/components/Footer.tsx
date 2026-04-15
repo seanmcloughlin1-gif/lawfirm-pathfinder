@@ -15,7 +15,7 @@ export function Footer() {
             <h4 className="font-heading text-sm font-semibold">Navigate</h4>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li><Link to="/" className="hover:text-foreground transition-colors">Home</Link></li>
-              <li><Link to="/jobs" className="hover:text-foreground transition-colors">Jobs</Link></li>
+              <li><Link to="/jobs" search={{} as any} className="hover:text-foreground transition-colors">Jobs</Link></li>
               <li><Link to="/employers" className="hover:text-foreground transition-colors">Employers</Link></li>
               <li><Link to="/about" className="hover:text-foreground transition-colors">About</Link></li>
             </ul>

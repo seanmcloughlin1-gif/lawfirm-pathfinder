@@ -12,7 +12,7 @@ function NotFoundComp() {
     <div className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6">
       <h1 className="font-heading text-2xl font-bold">Job Not Found</h1>
       <p className="mt-2 text-muted-foreground">This job listing may have been removed or expired.</p>
-      <Link to="/jobs"><Button variant="outline" className="mt-4">Browse All Jobs</Button></Link>
+      <Link to="/jobs" search={{} as any}><Button variant="outline" className="mt-4">Browse All Jobs</Button></Link>
     </div>
   );
 }
@@ -48,7 +48,7 @@ function JobDetailPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <Link to="/jobs" className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+      <Link to="/jobs" search={{} as any} className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
         <ArrowLeft className="h-3.5 w-3.5" /> Back to Jobs
       </Link>
 

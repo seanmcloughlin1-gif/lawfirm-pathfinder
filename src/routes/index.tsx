@@ -69,7 +69,7 @@ function HomePage() {
               <h2 className="font-heading text-2xl font-bold">Browse by Category</h2>
               <p className="mt-1 text-sm text-muted-foreground">Find roles aligned with your expertise</p>
             </div>
-            <Link to="/jobs" className="hidden items-center gap-1 text-sm font-medium text-primary hover:underline sm:flex">
+            <Link to="/jobs" search={{} as any} className="hidden items-center gap-1 text-sm font-medium text-primary hover:underline sm:flex">
               All categories <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -102,7 +102,7 @@ function HomePage() {
               <h2 className="font-heading text-2xl font-bold">Featured Jobs</h2>
               <p className="mt-1 text-sm text-muted-foreground">Hand-picked opportunities from top employers</p>
             </div>
-            <Link to="/jobs" className="hidden items-center gap-1 text-sm font-medium text-primary hover:underline sm:flex">
+            <Link to="/jobs" search={{} as any} className="hidden items-center gap-1 text-sm font-medium text-primary hover:underline sm:flex">
               View all jobs <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
