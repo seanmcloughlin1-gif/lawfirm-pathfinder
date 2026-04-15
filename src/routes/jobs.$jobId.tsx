@@ -3,7 +3,7 @@ import { MapPin, Clock, DollarSign, Building2, ArrowLeft, Bookmark, Share2 } fro
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { jobs } from "@/data/jobs";
+import { jobs, type Job } from "@/data/jobs";
 import { employers } from "@/data/employers";
 import { categories } from "@/data/categories";
 
