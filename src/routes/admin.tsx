@@ -76,7 +76,7 @@ function AdminPage() {
                   <td className="py-3 pr-4 font-medium">{job.title}</td>
                   <td className="py-3 pr-4 text-muted-foreground">{job.employerName}</td>
                   <td className="py-3 pr-4"><Badge variant="secondary" className="text-[10px]">{job.category}</Badge></td>
-                  <td className="py-3 pr-4"><Badge className="bg-green-100 text-green-800 border-0 text-[10px]">Active</Badge></td>
+                  <td className="py-3 pr-4"><Badge className="bg-primary/10 text-primary border-0 text-[10px]">Active</Badge></td>
                   <td className="py-3 text-muted-foreground">{job.postedDate}</td>
                 </tr>
               ))}
