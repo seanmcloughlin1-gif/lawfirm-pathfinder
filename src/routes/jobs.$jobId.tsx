@@ -41,7 +41,7 @@ export const Route = createFileRoute("/jobs/$jobId")({
 const remoteLabels: Record<string, string> = { remote: "Remote", hybrid: "Hybrid", onsite: "On-site" };
 
 function JobDetailPage() {
-  const { job } = Route.useLoaderData();
+  const { job } = Route.useLoaderData() as { job: Job };
   const employer = employers.find((e) => e.id === job.employerId);
   const cat = categories.find((c) => c.id === job.category);
   const relatedJobs = jobs.filter((j) => j.id !== job.id && j.category === job.category).slice(0, 3);

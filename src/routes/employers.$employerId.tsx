@@ -40,7 +40,7 @@ export const Route = createFileRoute("/employers/$employerId")({
 });
 
 function EmployerDetailPage() {
-  const { employer } = Route.useLoaderData();
+  const { employer } = Route.useLoaderData() as { employer: Employer };
   const employerJobs = jobs.filter((j) => j.employerId === employer.id);
 
   return (
