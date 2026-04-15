@@ -3,7 +3,7 @@ import { MapPin, Users, ExternalLink, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { JobCard } from "@/components/JobCard";
-import { employers } from "@/data/employers";
+import { employers, type Employer } from "@/data/employers";
 import { jobs } from "@/data/jobs";
 
 const typeLabels: Record<string, string> = { "law-firm": "Law Firm", corporate: "Corporate", "legal-tech": "Legal Tech", consulting: "Consulting", government: "Government" };
