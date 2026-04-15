@@ -54,7 +54,7 @@ function HomePage() {
                 className="h-11 bg-background pl-10"
               />
             </div>
-            <Link to="/jobs" search={{ q: searchQuery || undefined }}>
+            <Link to="/jobs" search={{ q: searchQuery || undefined } as any}>
               <Button size="lg" className="h-11">Search Jobs</Button>
             </Link>
           </form>
@@ -77,7 +77,7 @@ function HomePage() {
             {categories.map((cat) => {
               const Icon = cat.icon;
               return (
-                <Link key={cat.id} to="/jobs" search={{ category: cat.id }}>
+                <Link key={cat.id} to="/jobs" search={{ category: cat.id } as any}>
                   <Card className="group cursor-pointer transition-all hover:border-primary/30 hover:shadow-md">
                     <CardContent className="flex items-center gap-4 p-4">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">

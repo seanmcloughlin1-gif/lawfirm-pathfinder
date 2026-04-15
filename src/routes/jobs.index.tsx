@@ -25,8 +25,8 @@ export const Route = createFileRoute("/jobs/")({
 
 function JobsPage() {
   const { q, category: urlCategory } = Route.useSearch();
-  const [search, setSearch] = useState(q);
-  const [categoryFilter, setCategoryFilter] = useState(urlCategory);
+  const [search, setSearch] = useState(q || "");
+  const [categoryFilter, setCategoryFilter] = useState(urlCategory || "");
   const [locationFilter, setLocationFilter] = useState("");
   const [remoteFilter, setRemoteFilter] = useState("");
 
