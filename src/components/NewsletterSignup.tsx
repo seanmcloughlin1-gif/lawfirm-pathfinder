@@ -2,14 +2,26 @@ import { useState } from "react";
 import { Mail } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { subscribeNewsletter } from "@/lib/supabase-queries";
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (email) setSubmitted(true);
+    if (!email) return;
+    setLoading(true);
+    setError(null);
+    const result = await subscribeNewsletter(email);
+    setLoading(false);
+    if (result.error) {
+      setError(result.error);
+    } else {
+      setSubmitted(true);
+    }
   }
 
   if (submitted) {
@@ -38,8 +50,11 @@ export function NewsletterSignup() {
           required
           className="flex-1"
         />
-        <Button type="submit">Subscribe</Button>
+        <Button type="submit" disabled={loading}>
+          {loading ? "Subscribing…" : "Subscribe"}
+        </Button>
       </form>
+      {error && <p className="mt-2 text-center text-sm text-destructive">{error}</p>}
     </div>
   );
 }

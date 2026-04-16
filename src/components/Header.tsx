@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Scale, Menu, X } from "lucide-react";
+import { Scale, Menu, X, LogOut } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
 
 const navLinks = [
   { to: "/" as const, label: "Home", exact: true },
@@ -12,6 +13,7 @@ const navLinks = [
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user, loading, signOut } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -36,9 +38,20 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Link to="/login">
-            <Button variant="ghost" size="sm">Sign In</Button>
-          </Link>
+          {!loading && user ? (
+            <>
+              <Link to="/dashboard">
+                <Button variant="ghost" size="sm">Dashboard</Button>
+              </Link>
+              <Button variant="ghost" size="sm" onClick={() => signOut()} className="gap-1.5">
+                <LogOut className="h-3.5 w-3.5" /> Sign Out
+              </Button>
+            </>
+          ) : (
+            <Link to="/login">
+              <Button variant="ghost" size="sm">Sign In</Button>
+            </Link>
+          )}
         </div>
 
         <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
@@ -59,9 +72,20 @@ export function Header() {
                 {l.label}
               </Link>
             ))}
-            <Link to="/login" onClick={() => setMobileOpen(false)}>
-              <Button variant="outline" size="sm" className="mt-2 w-full">Sign In</Button>
-            </Link>
+            {!loading && user ? (
+              <>
+                <Link to="/dashboard" onClick={() => setMobileOpen(false)}>
+                  <Button variant="outline" size="sm" className="w-full">Dashboard</Button>
+                </Link>
+                <Button variant="ghost" size="sm" onClick={() => { signOut(); setMobileOpen(false); }} className="w-full gap-1.5">
+                  <LogOut className="h-3.5 w-3.5" /> Sign Out
+                </Button>
+              </>
+            ) : (
+              <Link to="/login" onClick={() => setMobileOpen(false)}>
+                <Button variant="outline" size="sm" className="mt-2 w-full">Sign In</Button>
+              </Link>
+            )}
           </nav>
         </div>
       )}
