@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { Search, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,8 +9,7 @@ import { JobCard } from "@/components/JobCard";
 import { EmployerCard } from "@/components/EmployerCard";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { categories } from "@/data/categories";
-import { featuredJobs, recentJobs } from "@/data/jobs";
-import { featuredEmployers } from "@/data/employers";
+import { fetchFeaturedJobs, fetchRecentJobs, fetchEmployers, type DbJob, type DbEmployer } from "@/lib/supabase-queries";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,6 +25,20 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [featuredJobs, setFeaturedJobs] = useState<DbJob[]>([]);
+  const [recentJobs, setRecentJobs] = useState<DbJob[]>([]);
+  const [employers, setEmployers] = useState<DbEmployer[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([fetchFeaturedJobs(), fetchRecentJobs(), fetchEmployers()])
+      .then(([fj, rj, emp]) => {
+        setFeaturedJobs(fj);
+        setRecentJobs(rj);
+        setEmployers(emp.slice(0, 6));
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <div>
@@ -41,9 +54,7 @@ function HomePage() {
           </p>
           <form
             className="mx-auto mt-8 flex max-w-xl gap-2"
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
+            onSubmit={(e) => e.preventDefault()}
           >
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -106,11 +117,19 @@ function HomePage() {
               View all jobs <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredJobs.slice(0, 6).map((job) => (
-              <JobCard key={job.id} job={job} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <Card key={i}><CardContent className="h-48 animate-pulse bg-muted/50 p-5" /></Card>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {featuredJobs.map((job) => (
+                <JobCard key={job.id} job={job} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Featured Employers */}
@@ -124,22 +143,26 @@ function HomePage() {
               View all employers <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredEmployers.slice(0, 6).map((emp) => (
-              <EmployerCard key={emp.id} employer={emp} />
-            ))}
-          </div>
+          {!loading && (
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {employers.map((emp) => (
+                <EmployerCard key={emp.id} employer={emp} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Recent Jobs */}
         <section className="pb-16">
           <h2 className="font-heading text-2xl font-bold">Recently Posted</h2>
           <p className="mt-1 text-sm text-muted-foreground">The latest openings across our network</p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {recentJobs.map((job) => (
-              <JobCard key={job.id} job={job} />
-            ))}
-          </div>
+          {!loading && (
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {recentJobs.map((job) => (
+                <JobCard key={job.id} job={job} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Newsletter */}
