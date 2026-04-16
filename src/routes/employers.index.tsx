@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { EmployerCard } from "@/components/EmployerCard";
-import { employers } from "@/data/employers";
+import { fetchEmployers, type DbEmployer } from "@/lib/supabase-queries";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/employers/")({
   head: () => ({
@@ -20,14 +21,39 @@ export const Route = createFileRoute("/employers/")({
 function EmployersPage() {
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
+  const [employers, setEmployers] = useState<DbEmployer[]>([]);
+  const [jobCounts, setJobCounts] = useState<Record<string, number>>({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchEmployers()
+      .then(async (emps) => {
+        setEmployers(emps);
+        // Fetch job counts per employer
+        const { data } = await supabase
+          .from("jobs")
+          .select("employer_id")
+          .eq("is_active", true);
+        if (data) {
+          const counts: Record<string, number> = {};
+          for (const row of data) {
+            if (row.employer_id) {
+              counts[row.employer_id] = (counts[row.employer_id] || 0) + 1;
+            }
+          }
+          setJobCounts(counts);
+        }
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
   const filtered = useMemo(() => {
     return employers.filter((e) => {
       const matchesSearch = !search || e.name.toLowerCase().includes(search.toLowerCase());
-      const matchesType = !typeFilter || e.type === typeFilter;
+      const matchesType = !typeFilter || e.employer_type === typeFilter;
       return matchesSearch && matchesType;
     });
-  }, [search, typeFilter]);
+  }, [employers, search, typeFilter]);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
@@ -51,15 +77,17 @@ function EmployersPage() {
         </select>
       </div>
 
-      <p className="mb-4 text-sm text-muted-foreground">{filtered.length} employers</p>
+      <p className="mb-4 text-sm text-muted-foreground">
+        {loading ? "Loading…" : `${filtered.length} employers`}
+      </p>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((emp) => (
-          <EmployerCard key={emp.id} employer={emp} />
+          <EmployerCard key={emp.id} employer={emp} jobCount={jobCounts[emp.id] ?? 0} />
         ))}
       </div>
 
-      {filtered.length === 0 && (
+      {!loading && filtered.length === 0 && (
         <div className="py-16 text-center text-muted-foreground">No employers match your search.</div>
       )}
     </div>

@@ -2,9 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { MapPin, Clock, Building2, DollarSign } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { categories } from "@/data/categories";
-import type { Job } from "@/data/jobs";
+import type { DbJob } from "@/lib/supabase-queries";
 
 function formatDate(dateStr: string) {
   const d = new Date(dateStr);
@@ -23,7 +22,7 @@ const remoteLabels: Record<string, string> = {
   onsite: "On-site",
 };
 
-export function JobCard({ job }: { job: Job }) {
+export function JobCard({ job }: { job: DbJob }) {
   const cat = categories.find((c) => c.id === job.category);
   return (
     <Card className="group transition-shadow hover:shadow-md">
@@ -39,7 +38,7 @@ export function JobCard({ job }: { job: Job }) {
             </Link>
             <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
               <Building2 className="h-3.5 w-3.5 shrink-0" />
-              {job.employerName}
+              {job.employer_name}
             </p>
           </div>
           {job.featured && (
@@ -49,8 +48,8 @@ export function JobCard({ job }: { job: Job }) {
 
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
           <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{job.location}</span>
-          <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{remoteLabels[job.remote]}</span>
-          {job.salary && <span className="flex items-center gap-1"><DollarSign className="h-3 w-3" />{job.salary}</span>}
+          <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{remoteLabels[job.remote_type]}</span>
+          {job.salary_display && <span className="flex items-center gap-1"><DollarSign className="h-3 w-3" />{job.salary_display}</span>}
         </div>
 
         <p className="text-sm text-muted-foreground line-clamp-2">{job.description}</p>
@@ -58,9 +57,9 @@ export function JobCard({ job }: { job: Job }) {
         <div className="flex items-center justify-between pt-1">
           <div className="flex items-center gap-2">
             {cat && <Badge variant="secondary" className="text-[10px]">{cat.name}</Badge>}
-            <Badge variant="outline" className="text-[10px]">{job.type}</Badge>
+            <Badge variant="outline" className="text-[10px]">{job.employment_type}</Badge>
           </div>
-          <span className="text-[11px] text-muted-foreground">{formatDate(job.postedDate)}</span>
+          <span className="text-[11px] text-muted-foreground">{formatDate(job.date_posted)}</span>
         </div>
       </CardContent>
     </Card>
