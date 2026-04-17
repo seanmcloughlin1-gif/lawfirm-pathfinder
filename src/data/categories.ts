@@ -1,4 +1,7 @@
-import { Briefcase, Scale, Shield, Cpu, BarChart3, BookOpen, Megaphone, Users } from "lucide-react";
+import {
+  Briefcase, Scale, Shield, Cpu, BarChart3, BookOpen, Megaphone, Users,
+  AlertTriangle, GitBranch, Search, ClipboardList, FileText, Lock, Lightbulb, Kanban, TrendingUp, GraduationCap,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export interface Category {
@@ -6,16 +9,25 @@ export interface Category {
   name: string;
   description: string;
   icon: LucideIcon;
-  jobCount: number;
 }
 
 export const categories: Category[] = [
-  { id: "legal-ops", name: "Legal Operations", description: "Process improvement, technology adoption, and operational strategy for legal departments", icon: Briefcase, jobCount: 42 },
-  { id: "compliance", name: "Compliance & Risk", description: "Regulatory compliance, risk assessment, and governance programs", icon: Shield, jobCount: 38 },
-  { id: "legal-tech", name: "Legal Technology", description: "Software development, implementation, and innovation in legal tech", icon: Cpu, jobCount: 31 },
-  { id: "bd-marketing", name: "Business Development", description: "Client development, marketing strategy, and competitive intelligence", icon: Megaphone, jobCount: 27 },
-  { id: "km", name: "Knowledge Management", description: "Knowledge systems, precedent databases, and institutional know-how", icon: BookOpen, jobCount: 22 },
-  { id: "finance", name: "Finance & Pricing", description: "Legal pricing, financial analysis, budgeting, and billing operations", icon: BarChart3, jobCount: 19 },
-  { id: "hr-talent", name: "HR & Talent", description: "Recruitment, professional development, and people operations", icon: Users, jobCount: 24 },
-  { id: "jd-advantage", name: "JD Advantage", description: "Roles that leverage a law degree outside of traditional practice", icon: Scale, jobCount: 35 },
+  { id: "legal-operations", name: "Legal Operations", description: "Process, technology, and operational strategy for legal teams", icon: Briefcase },
+  { id: "pricing", name: "Pricing", description: "Legal pricing strategy, AFAs, and matter budgeting", icon: BarChart3 },
+  { id: "knowledge-management", name: "Knowledge Management", description: "Knowledge systems, precedent libraries, and institutional know-how", icon: BookOpen },
+  { id: "compliance", name: "Compliance", description: "Regulatory compliance and governance programs", icon: Shield },
+  { id: "risk", name: "Risk", description: "Enterprise and matter-level risk assessment and management", icon: AlertTriangle },
+  { id: "conflicts", name: "Conflicts", description: "Conflicts clearance, new business intake, and ethics", icon: GitBranch },
+  { id: "ediscovery", name: "eDiscovery", description: "Discovery operations, review management, and litigation support", icon: Search },
+  { id: "practice-management", name: "Practice Management", description: "Practice group operations and attorney support", icon: ClipboardList },
+  { id: "marketing-bd", name: "Marketing and Business Development", description: "Brand, marketing strategy, and growth", icon: Megaphone },
+  { id: "client-development", name: "Client Development", description: "Client relationships, pursuits, and key accounts", icon: TrendingUp },
+  { id: "professional-development", name: "Professional Development", description: "Attorney training, learning, and career development", icon: GraduationCap },
+  { id: "legal-tech", name: "Legal Tech", description: "Legal technology product, implementation, and innovation", icon: Cpu },
+  { id: "contracts", name: "Contracts", description: "Contract lifecycle management, drafting, and negotiation", icon: FileText },
+  { id: "privacy", name: "Privacy", description: "Data privacy, protection programs, and DPO roles", icon: Lock },
+  { id: "innovation", name: "Innovation", description: "Legal innovation, design, and new service models", icon: Lightbulb },
+  { id: "project-management", name: "Project Management", description: "Legal project management and matter delivery", icon: Kanban },
+  { id: "jd-advantage", name: "JD Advantage", description: "Roles that leverage a law degree outside traditional practice", icon: Scale },
+  { id: "hr-talent", name: "HR & Talent", description: "Recruiting, people operations, and talent strategy", icon: Users },
 ];
