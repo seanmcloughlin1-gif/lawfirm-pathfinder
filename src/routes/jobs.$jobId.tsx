@@ -302,7 +302,7 @@ function JobDetailPage() {
             <section className="mt-8">
               <h2 className="font-heading text-xl font-semibold">Requirements</h2>
               <ul className="mt-3 space-y-2">
-                {job.requirements.map((r, i) => (
+                {job.requirements.map((r: string, i: number) => (
                   <li key={i} className="flex items-start gap-2 text-muted-foreground">
                     <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                     <span>{r}</span>
@@ -318,7 +318,7 @@ function JobDetailPage() {
                 <Tag className="h-4 w-4" /> Tags
               </h2>
               <div className="mt-3 flex flex-wrap gap-2">
-                {job.tags.map((t) => (
+                {job.tags.map((t: string) => (
                   <Badge key={t} variant="secondary" className="text-xs font-normal">
                     {t}
                   </Badge>
