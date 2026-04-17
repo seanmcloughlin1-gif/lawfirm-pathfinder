@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { JobCard } from "@/components/JobCard";
 import {
   fetchEmployerBySlug, fetchJobsByEmployerId,
+  type DbJob,
 } from "@/lib/supabase-queries";
 import { formatEmployerType } from "@/data/employer-types";
 
@@ -142,7 +143,7 @@ function EmployerDetailPage() {
         </h2>
         {jobs.length > 0 ? (
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {jobs.map((job) => (
+            {jobs.map((job: DbJob) => (
               <JobCard key={job.id} job={job} />
             ))}
           </div>
