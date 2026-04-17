@@ -96,7 +96,7 @@ function HomePage() {
                       </div>
                       <div className="min-w-0">
                         <p className="text-sm font-semibold">{cat.name}</p>
-                        <p className="text-xs text-muted-foreground">{cat.jobCount} positions</p>
+                        <p className="line-clamp-1 text-xs text-muted-foreground">{cat.description}</p>
                       </div>
                     </CardContent>
                   </Card>
