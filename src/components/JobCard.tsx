@@ -1,8 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { MapPin, Clock, Building2, DollarSign, Sparkles, Scale } from "lucide-react";
+import { MapPin, Clock, Building2, DollarSign, Sparkles, Scale, Bookmark } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { categories } from "@/data/categories";
+import { useSavedJobs } from "@/hooks/useSavedJobs";
+import { cn } from "@/lib/utils";
 import type { DbJob } from "@/lib/supabase-queries";
 
 function formatDate(dateStr: string) {
@@ -34,6 +37,8 @@ export function JobCard({ job }: { job: DbJob }) {
   const cat = categories.find((c) => c.id === job.category);
   const summary = job.short_summary || job.description;
   const tags = (job.tags ?? []).slice(0, 4);
+  const { isSaved, toggleSave } = useSavedJobs();
+  const saved = isSaved(job.id);
 
   return (
     <Card className="group transition-all hover:shadow-md hover:border-primary/30">
@@ -67,6 +72,15 @@ export function JobCard({ job }: { job: DbJob }) {
               <span className="truncate">{job.employer_name}</span>
             </p>
           </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8 shrink-0 text-muted-foreground hover:text-primary"
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleSave(job.id); }}
+            aria-label={saved ? "Remove from saved jobs" : "Save job"}
+          >
+            <Bookmark className={cn("h-4 w-4", saved && "fill-primary text-primary")} />
+          </Button>
         </div>
 
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
