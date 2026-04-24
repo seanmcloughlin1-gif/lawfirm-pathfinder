@@ -1,15 +1,25 @@
 import { Link } from "@tanstack/react-router";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 export function Footer() {
   return (
     <footer className="border-t bg-muted/40">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
+          <div className="sm:col-span-2 lg:col-span-1">
             <p className="font-heading text-lg font-bold tracking-tight">JD Careers</p>
             <p className="mt-2 text-sm text-muted-foreground">
               The niche job board for non-practicing attorneys, legal ops professionals, and law firm business staff.
             </p>
+            <div className="mt-4">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Weekly job digest
+              </p>
+              <NewsletterSignup variant="compact" />
+              <p className="mt-2 text-xs text-muted-foreground">
+                Curated law firm & JD-advantage roles, every Monday.
+              </p>
+            </div>
           </div>
           <div>
             <h4 className="font-heading text-sm font-semibold">Navigate</h4>

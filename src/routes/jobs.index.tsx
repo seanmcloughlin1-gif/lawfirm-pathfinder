@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { JobCard } from "@/components/JobCard";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 import {
   fetchJobs,
   fetchAllLocations,
@@ -228,6 +229,10 @@ function JobsPage() {
               <Button variant="link" onClick={clearAll} className="mt-2">Clear filters</Button>
             </div>
           )}
+
+          <div className="mt-10">
+            <NewsletterSignup variant="inline" />
+          </div>
         </div>
       </div>
     </div>
