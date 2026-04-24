@@ -36,11 +36,13 @@ const EMPLOYMENT_TYPES = [
 export const Route = createFileRoute("/jobs/")({
   head: () => ({
     meta: [
-      { title: "Browse Jobs — JD Careers" },
-      { name: "description", content: "Search JD-advantage, legal ops, compliance, legal tech, and business professional jobs at top law firms and legal organizations." },
+      { title: "Browse Jobs — JD-Advantage & Legal Professional Roles | JD Careers" },
+      { name: "description", content: "Search curated JD-advantage, legal ops, compliance, legal tech, KM, and law firm business professional jobs. Filter by category, location, and remote type." },
       { property: "og:title", content: "Browse Jobs — JD Careers" },
-      { property: "og:description", content: "Search JD-advantage and legal professional jobs." },
+      { property: "og:description", content: "Search JD-advantage and legal professional jobs at top firms and legal organizations." },
+      { property: "og:url", content: "https://jdcareers.app/jobs" },
     ],
+    links: [{ rel: "canonical", href: "https://jdcareers.app/jobs" }],
   }),
   validateSearch: (search: Record<string, unknown>): { q?: string; category?: string } => ({
     q: (search.q as string) || undefined,

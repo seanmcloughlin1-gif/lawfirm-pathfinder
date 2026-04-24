@@ -4,8 +4,12 @@ export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
       { title: "Privacy Policy — JD Careers" },
-      { name: "description", content: "JD Careers privacy policy — how we collect, use, and protect your information." },
+      { name: "description", content: "How JD Careers collects, uses, and protects your information when you use our niche legal job board." },
+      { property: "og:title", content: "Privacy Policy — JD Careers" },
+      { property: "og:description", content: "How JD Careers handles your information." },
+      { property: "og:url", content: "https://jdcareers.app/privacy" },
     ],
+    links: [{ rel: "canonical", href: "https://jdcareers.app/privacy" }],
   }),
   component: PrivacyPage,
 });

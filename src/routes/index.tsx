@@ -10,6 +10,7 @@ import { EmployerCard } from "@/components/EmployerCard";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { categories } from "@/data/categories";
 import { fetchFeaturedJobs, fetchRecentJobs, fetchEmployers, type DbJob, type DbEmployer } from "@/lib/supabase-queries";
+import { canonical, websiteJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,6 +19,14 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "The niche job board for JD-advantage roles, legal operations, compliance, legal tech, and law firm business professional positions." },
       { property: "og:title", content: "JD Careers — Non-Practicing Attorney & Legal Professional Jobs" },
       { property: "og:description", content: "Find JD-advantage roles, legal ops, compliance, legal tech, and law firm business professional jobs." },
+      { property: "og:url", content: canonical("/") },
+    ],
+    links: [{ rel: "canonical", href: canonical("/") }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(websiteJsonLd()),
+      },
     ],
   }),
   component: HomePage,
