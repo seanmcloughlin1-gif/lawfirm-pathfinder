@@ -9,11 +9,13 @@ import { Card, CardContent } from "@/components/ui/card";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — JD Careers" },
-      { name: "description", content: "Get in touch with the JD Careers team for job posting inquiries, partnerships, or general questions." },
+      { title: "Contact JD Careers — Job Postings & Partnerships" },
+      { name: "description", content: "Get in touch with the JD Careers team about posting a role, partnerships, or general questions about our niche legal job board." },
       { property: "og:title", content: "Contact JD Careers" },
       { property: "og:description", content: "Reach out about job postings, partnerships, or questions." },
+      { property: "og:url", content: "https://jdcareers.app/contact" },
     ],
+    links: [{ rel: "canonical", href: "https://jdcareers.app/contact" }],
   }),
   component: ContactPage,
 });

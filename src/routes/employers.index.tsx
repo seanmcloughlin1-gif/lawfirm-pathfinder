@@ -14,11 +14,13 @@ import { employerTypes } from "@/data/employer-types";
 export const Route = createFileRoute("/employers/")({
   head: () => ({
     meta: [
-      { title: "Employer Directory — JD Careers" },
-      { name: "description", content: "Browse law firms, legal tech companies, ALSPs, in-house legal departments, and consulting firms hiring legal professionals." },
+      { title: "Employer Directory — Law Firms, Legal Tech & ALSPs | JD Careers" },
+      { name: "description", content: "Browse law firms, legal tech companies, ALSPs, in-house legal departments, consulting firms, and professional services firms hiring legal professionals." },
       { property: "og:title", content: "Employer Directory — JD Careers" },
-      { property: "og:description", content: "Browse employers hiring legal professionals." },
+      { property: "og:description", content: "Browse employers hiring non-practicing attorneys and legal business professionals." },
+      { property: "og:url", content: "https://jdcareers.app/employers" },
     ],
+    links: [{ rel: "canonical", href: "https://jdcareers.app/employers" }],
   }),
   component: EmployersPage,
 });

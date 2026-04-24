@@ -4,8 +4,12 @@ export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
       { title: "Terms of Service — JD Careers" },
-      { name: "description", content: "JD Careers terms of service governing your use of our platform." },
+      { name: "description", content: "Terms governing your use of JD Careers, the niche job board for non-practicing attorneys and legal business professionals." },
+      { property: "og:title", content: "Terms of Service — JD Careers" },
+      { property: "og:description", content: "Terms governing your use of JD Careers." },
+      { property: "og:url", content: "https://jdcareers.app/terms" },
     ],
+    links: [{ rel: "canonical", href: "https://jdcareers.app/terms" }],
   }),
   component: TermsPage,
 });
