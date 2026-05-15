@@ -85,9 +85,9 @@
   --sidebar-accent-foreground: oklch(0.25 0.04 260);
   --sidebar-border: oklch(0.915 0.012 260);
   --sidebar-ring: oklch(0.475 0.18 260);
-  --hero-bg: oklch(0.22 0.04 260);
-  --hero-foreground: oklch(0.985 0.002 250);
-  --hero-muted: oklch(0.75 0.02 260);
+  --hero-bg: oklch(0.21 0.045 250);
+  --hero-foreground: oklch(0.99 0.003 250);
+  --hero-muted: oklch(0.78 0.022 250);
 }
 
 .dark {
