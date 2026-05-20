@@ -135,6 +135,7 @@ const addOns = [
 ];
 
 function ForEmployersPage() {
+  usePageView("pricing_page_view", { page: "for-employers" });
   return (
     <div>
       {/* Hero */}
