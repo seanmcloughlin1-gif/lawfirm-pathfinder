@@ -15,6 +15,7 @@ import {
   type DbJob, type DbEmployer,
 } from "@/lib/supabase-queries";
 import { useAuth } from "@/hooks/useAuth";
+import { track } from "@/lib/analytics";
 import { toast } from "sonner";
 
 const remoteLabels: Record<string, string> = {
