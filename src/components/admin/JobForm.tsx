@@ -202,6 +202,24 @@ export function JobForm({ initial, onSubmit, submitLabel = "Save" }: JobFormProp
         </div>
 
         <div>
+          <Label htmlFor="source_name">Source name</Label>
+          <Input id="source_name" value={form.source_name} onChange={(e) => set("source_name", e.target.value)} placeholder="LinkedIn, Indeed, partner X…" />
+        </div>
+        <div>
+          <Label htmlFor="imported_at">Imported date</Label>
+          <Input id="imported_at" type="date" value={form.imported_at} onChange={(e) => set("imported_at", e.target.value)} />
+        </div>
+
+        <div>
+          <Label>Status *</Label>
+          <Select value={form.status} onValueChange={(v) => set("status", v as JobStatus)}>
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>{STATUSES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
+          </Select>
+        </div>
+        <div />
+
+        <div>
           <Label htmlFor="date_posted">Posted date *</Label>
           <Input id="date_posted" type="date" required value={form.date_posted} onChange={(e) => set("date_posted", e.target.value)} />
         </div>
