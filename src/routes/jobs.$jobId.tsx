@@ -262,7 +262,12 @@ function JobDetailPage() {
             <div className="mt-6 flex flex-wrap gap-2">
               {job.source_url ? (
                 <Button size="lg" asChild>
-                  <a href={job.source_url} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={job.source_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track("apply_clicked", { job_id: job.id, employer: job.employer_name, location: "header" })}
+                  >
                     Apply on Employer Site
                     <ExternalLink className="ml-1 h-4 w-4" />
                   </a>
