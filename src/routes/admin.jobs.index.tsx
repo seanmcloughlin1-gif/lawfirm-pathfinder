@@ -57,12 +57,22 @@ function AdminJobsList() {
   return (
     <div>
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Input
-          placeholder="Search jobs by title or employer…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="sm:max-w-md"
-        />
+        <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center">
+          <Input
+            placeholder="Search jobs by title or employer…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="sm:max-w-md"
+          />
+          <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v as typeof statusFilter)}>
+            <SelectTrigger className="sm:w-40"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {STATUS_FILTERS.map((s) => (
+                <SelectItem key={s} value={s}>{s === "all" ? "All statuses" : s}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
         <Link to="/admin/jobs/new">
           <Button className="gap-1.5"><Plus className="h-4 w-4" /> New job</Button>
         </Link>
