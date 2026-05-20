@@ -7,6 +7,7 @@ import {
   Check, Star, Megaphone, Mail, Sparkles,
 } from "lucide-react";
 import { canonical } from "@/lib/seo";
+import { usePageView } from "@/lib/analytics";
 
 export const Route = createFileRoute("/for-employers")({
   head: () => ({
@@ -134,6 +135,7 @@ const addOns = [
 ];
 
 function ForEmployersPage() {
+  usePageView("pricing_page_view", { page: "for-employers" });
   return (
     <div>
       {/* Hero */}

@@ -3,14 +3,16 @@ import { Mail, CheckCircle2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { subscribeNewsletter } from "@/lib/supabase-queries";
+import { track } from "@/lib/analytics";
 
 interface NewsletterSignupProps {
   variant?: "card" | "inline" | "compact";
+  source?: string;
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export function NewsletterSignup({ variant = "card" }: NewsletterSignupProps) {
+export function NewsletterSignup({ variant = "card", source }: NewsletterSignupProps) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -32,6 +34,7 @@ export function NewsletterSignup({ variant = "card" }: NewsletterSignupProps) {
       setError(result.error);
     } else {
       setSubmitted(true);
+      track("newsletter_signup", { source: source ?? variant });
     }
   }
 

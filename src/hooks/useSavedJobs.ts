@@ -3,6 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import { fetchSavedJobIds, saveJob, unsaveJob } from "@/lib/supabase-queries";
+import { track } from "@/lib/analytics";
 
 export function useSavedJobs() {
   const { user, loading: authLoading } = useAuth();
@@ -53,6 +54,7 @@ export function useSavedJobs() {
         });
         toast.error(result.error);
       } else {
+        if (!isSaved) track("job_saved", { job_id: jobId });
         toast.success(isSaved ? "Removed from saved jobs" : "Job saved");
       }
     },

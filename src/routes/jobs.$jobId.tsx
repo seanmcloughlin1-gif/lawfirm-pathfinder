@@ -15,6 +15,7 @@ import {
   type DbJob, type DbEmployer,
 } from "@/lib/supabase-queries";
 import { useAuth } from "@/hooks/useAuth";
+import { track } from "@/lib/analytics";
 import { toast } from "sonner";
 
 const remoteLabels: Record<string, string> = {
@@ -261,7 +262,12 @@ function JobDetailPage() {
             <div className="mt-6 flex flex-wrap gap-2">
               {job.source_url ? (
                 <Button size="lg" asChild>
-                  <a href={job.source_url} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={job.source_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track("apply_clicked", { job_id: job.id, employer: job.employer_name, location: "header" })}
+                  >
                     Apply on Employer Site
                     <ExternalLink className="ml-1 h-4 w-4" />
                   </a>
@@ -334,7 +340,12 @@ function JobDetailPage() {
                 Applications are handled directly by {job.employer_name} on their careers site.
               </p>
               <Button className="mt-3" asChild>
-                <a href={job.source_url} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={job.source_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track("apply_clicked", { job_id: job.id, employer: job.employer_name, location: "footer" })}
+                >
                   Apply on Employer Site
                   <ExternalLink className="ml-1 h-4 w-4" />
                 </a>
