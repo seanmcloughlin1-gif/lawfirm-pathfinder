@@ -3,6 +3,11 @@ import { Mail, CheckCircle2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { subscribeNewsletter } from "@/lib/supabase-queries";
+import { track } from "@/lib/analytics";
+
+interface NewsletterSignupVariantProps {
+  source?: string;
+}
 
 interface NewsletterSignupProps {
   variant?: "card" | "inline" | "compact";
