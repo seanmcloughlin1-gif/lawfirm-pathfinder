@@ -102,9 +102,15 @@ function AdminJobsList() {
                   <td className="px-4 py-3 text-muted-foreground">{job.employer_name}</td>
                   <td className="px-4 py-3"><Badge variant="secondary" className="text-[10px]">{job.category}</Badge></td>
                   <td className="px-4 py-3">
-                    <Badge className={job.is_active ? "bg-primary/10 text-primary border-0" : "bg-muted text-muted-foreground border-0"}>
-                      {job.is_active ? "Active" : "Archived"}
-                    </Badge>
+                    {(() => {
+                      const s = job.status ?? "published";
+                      const cls =
+                        s === "published" ? "bg-primary/10 text-primary border-0"
+                        : s === "draft" ? "bg-amber-500/10 text-amber-700 border-0"
+                        : s === "expired" ? "bg-destructive/10 text-destructive border-0"
+                        : "bg-muted text-muted-foreground border-0";
+                      return <Badge className={cls}>{s}</Badge>;
+                    })()}
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">{job.date_posted}</td>
                   <td className="px-4 py-3">
