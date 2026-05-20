@@ -15,6 +15,8 @@ type Employer = Tables<"employers">;
 const REMOTE_TYPES = ["remote", "hybrid", "onsite"];
 const EMPLOYMENT_TYPES = ["full-time", "part-time", "contract", "temporary", "internship"];
 const SOURCE_TYPES = ["direct", "scraped", "partner", "referral"];
+const STATUSES = ["draft", "published", "expired", "archived"] as const;
+type JobStatus = (typeof STATUSES)[number];
 
 interface JobFormProps {
   initial?: Job;
