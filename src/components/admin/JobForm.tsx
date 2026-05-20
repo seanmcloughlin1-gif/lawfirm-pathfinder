@@ -89,13 +89,16 @@ export function JobForm({ initial, onSubmit, submitLabel = "Save" }: JobFormProp
       tags: form.tags.split(",").map((t) => t.trim()).filter(Boolean),
       source_url: form.source_url.trim() || null,
       source_type: form.source_type || null,
+      source_name: form.source_name.trim() || null,
+      imported_at: form.imported_at ? new Date(form.imported_at).toISOString() : null,
+      status: form.status,
       date_posted: form.date_posted,
       expiration_date: form.expiration_date || null,
       is_jd_advantage: form.is_jd_advantage,
       is_non_practicing_attorney_role: form.is_non_practicing_attorney_role,
       is_active: form.is_active,
       featured: form.featured,
-    };
+    } as JobInsert;
     try {
       await onSubmit(payload);
     } finally {
