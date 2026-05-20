@@ -22,9 +22,17 @@ export async function adminGetJob(id: string) {
   return data;
 }
 
+function friendlyJobError(message: string | undefined): string | null {
+  if (!message) return null;
+  if (message.includes("jobs_dedupe_source_idx") || (message.includes("duplicate key") && message.includes("source_url"))) {
+    return "A job with the same title, employer, and source URL already exists.";
+  }
+  return message;
+}
+
 export async function adminCreateJob(payload: JobInsert) {
   const { data, error } = await supabase.from("jobs").insert(payload).select().single();
-  return { data, error: error?.message ?? null };
+  return { data, error: friendlyJobError(error?.message) };
 }
 
 export async function adminUpdateJob(id: string, payload: JobUpdate) {
@@ -34,7 +42,7 @@ export async function adminUpdateJob(id: string, payload: JobUpdate) {
     .eq("id", id)
     .select()
     .single();
-  return { data, error: error?.message ?? null };
+  return { data, error: friendlyJobError(error?.message) };
 }
 
 export async function adminDeleteJob(id: string) {
