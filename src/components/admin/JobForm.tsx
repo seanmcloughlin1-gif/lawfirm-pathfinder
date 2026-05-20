@@ -45,6 +45,10 @@ export function JobForm({ initial, onSubmit, submitLabel = "Save" }: JobFormProp
     tags: (initial?.tags ?? []).join(", "),
     source_url: initial?.source_url ?? "",
     source_type: initial?.source_type ?? "direct",
+    source_name: (initial as { source_name?: string | null } | undefined)?.source_name ?? "",
+    imported_at:
+      (initial as { imported_at?: string | null } | undefined)?.imported_at?.slice(0, 10) ?? "",
+    status: ((initial as { status?: JobStatus } | undefined)?.status ?? "published") as JobStatus,
     date_posted: initial?.date_posted ?? new Date().toISOString().slice(0, 10),
     expiration_date: initial?.expiration_date ?? "",
     is_jd_advantage: initial?.is_jd_advantage ?? false,
