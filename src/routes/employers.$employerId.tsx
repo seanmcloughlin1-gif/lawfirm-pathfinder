@@ -9,6 +9,7 @@ import {
   type DbJob,
 } from "@/lib/supabase-queries";
 import { formatEmployerType } from "@/data/employer-types";
+import { usePageView } from "@/lib/analytics";
 
 function NotFoundComp() {
   return (
