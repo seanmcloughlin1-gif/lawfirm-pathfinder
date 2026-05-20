@@ -65,6 +65,7 @@ export type Database = {
           expiration_date: string | null
           featured: boolean
           id: string
+          imported_at: string | null
           is_active: boolean
           is_jd_advantage: boolean
           is_non_practicing_attorney_role: boolean
@@ -75,8 +76,10 @@ export type Database = {
           salary_max: number | null
           salary_min: number | null
           short_summary: string | null
+          source_name: string | null
           source_type: string | null
           source_url: string | null
+          status: Database["public"]["Enums"]["job_status"]
           subcategory: string | null
           tags: string[] | null
           title: string
@@ -93,6 +96,7 @@ export type Database = {
           expiration_date?: string | null
           featured?: boolean
           id?: string
+          imported_at?: string | null
           is_active?: boolean
           is_jd_advantage?: boolean
           is_non_practicing_attorney_role?: boolean
@@ -103,8 +107,10 @@ export type Database = {
           salary_max?: number | null
           salary_min?: number | null
           short_summary?: string | null
+          source_name?: string | null
           source_type?: string | null
           source_url?: string | null
+          status?: Database["public"]["Enums"]["job_status"]
           subcategory?: string | null
           tags?: string[] | null
           title: string
@@ -121,6 +127,7 @@ export type Database = {
           expiration_date?: string | null
           featured?: boolean
           id?: string
+          imported_at?: string | null
           is_active?: boolean
           is_jd_advantage?: boolean
           is_non_practicing_attorney_role?: boolean
@@ -131,8 +138,10 @@ export type Database = {
           salary_max?: number | null
           salary_min?: number | null
           short_summary?: string | null
+          source_name?: string | null
           source_type?: string | null
           source_url?: string | null
+          status?: Database["public"]["Enums"]["job_status"]
           subcategory?: string | null
           tags?: string[] | null
           title?: string
@@ -231,6 +240,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      job_status: "draft" | "published" | "expired" | "archived"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -359,6 +369,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      job_status: ["draft", "published", "expired", "archived"],
     },
   },
 } as const

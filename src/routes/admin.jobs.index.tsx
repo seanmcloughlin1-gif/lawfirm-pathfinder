@@ -5,29 +5,39 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { adminListJobs, adminDeleteJob, adminToggleJobActive } from "@/lib/admin-queries";
 import type { Tables } from "@/integrations/supabase/types";
+
+type JobRow = Tables<"jobs"> & { status?: "draft" | "published" | "expired" | "archived" | null };
+const STATUS_FILTERS = ["all", "draft", "published", "expired", "archived"] as const;
 
 export const Route = createFileRoute("/admin/jobs/")({
   component: AdminJobsList,
 });
 
 function AdminJobsList() {
-  const [jobs, setJobs] = useState<Tables<"jobs">[]>([]);
+  const [jobs, setJobs] = useState<JobRow[]>([]);
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<(typeof STATUS_FILTERS)[number]>("all");
   const [loading, setLoading] = useState(true);
 
   const load = () => {
     setLoading(true);
-    adminListJobs().then(setJobs).catch(() => setJobs([])).finally(() => setLoading(false));
+    adminListJobs()
+      .then((d) => setJobs(d as JobRow[]))
+      .catch(() => setJobs([]))
+      .finally(() => setLoading(false));
   };
   useEffect(() => { load(); }, []);
 
-  const filtered = jobs.filter(
-    (j) =>
+  const filtered = jobs.filter((j) => {
+    const matchesSearch =
       j.title.toLowerCase().includes(search.toLowerCase()) ||
-      j.employer_name.toLowerCase().includes(search.toLowerCase()),
-  );
+      j.employer_name.toLowerCase().includes(search.toLowerCase());
+    const matchesStatus = statusFilter === "all" || (j.status ?? "published") === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   const handleToggle = async (id: string, isActive: boolean) => {
     const { error } = await adminToggleJobActive(id, !isActive);
@@ -47,12 +57,22 @@ function AdminJobsList() {
   return (
     <div>
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Input
-          placeholder="Search jobs by title or employer…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="sm:max-w-md"
-        />
+        <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center">
+          <Input
+            placeholder="Search jobs by title or employer…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="sm:max-w-md"
+          />
+          <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v as typeof statusFilter)}>
+            <SelectTrigger className="sm:w-40"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {STATUS_FILTERS.map((s) => (
+                <SelectItem key={s} value={s}>{s === "all" ? "All statuses" : s}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
         <Link to="/admin/jobs/new">
           <Button className="gap-1.5"><Plus className="h-4 w-4" /> New job</Button>
         </Link>
@@ -82,9 +102,15 @@ function AdminJobsList() {
                   <td className="px-4 py-3 text-muted-foreground">{job.employer_name}</td>
                   <td className="px-4 py-3"><Badge variant="secondary" className="text-[10px]">{job.category}</Badge></td>
                   <td className="px-4 py-3">
-                    <Badge className={job.is_active ? "bg-primary/10 text-primary border-0" : "bg-muted text-muted-foreground border-0"}>
-                      {job.is_active ? "Active" : "Archived"}
-                    </Badge>
+                    {(() => {
+                      const s = job.status ?? "published";
+                      const cls =
+                        s === "published" ? "bg-primary/10 text-primary border-0"
+                        : s === "draft" ? "bg-amber-500/10 text-amber-700 border-0"
+                        : s === "expired" ? "bg-destructive/10 text-destructive border-0"
+                        : "bg-muted text-muted-foreground border-0";
+                      return <Badge className={cls}>{s}</Badge>;
+                    })()}
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">{job.date_posted}</td>
                   <td className="px-4 py-3">

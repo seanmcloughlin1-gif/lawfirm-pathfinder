@@ -15,6 +15,8 @@ type Employer = Tables<"employers">;
 const REMOTE_TYPES = ["remote", "hybrid", "onsite"];
 const EMPLOYMENT_TYPES = ["full-time", "part-time", "contract", "temporary", "internship"];
 const SOURCE_TYPES = ["direct", "scraped", "partner", "referral"];
+const STATUSES = ["draft", "published", "expired", "archived"] as const;
+type JobStatus = (typeof STATUSES)[number];
 
 interface JobFormProps {
   initial?: Job;
@@ -43,6 +45,10 @@ export function JobForm({ initial, onSubmit, submitLabel = "Save" }: JobFormProp
     tags: (initial?.tags ?? []).join(", "),
     source_url: initial?.source_url ?? "",
     source_type: initial?.source_type ?? "direct",
+    source_name: (initial as { source_name?: string | null } | undefined)?.source_name ?? "",
+    imported_at:
+      (initial as { imported_at?: string | null } | undefined)?.imported_at?.slice(0, 10) ?? "",
+    status: ((initial as { status?: JobStatus } | undefined)?.status ?? "published") as JobStatus,
     date_posted: initial?.date_posted ?? new Date().toISOString().slice(0, 10),
     expiration_date: initial?.expiration_date ?? "",
     is_jd_advantage: initial?.is_jd_advantage ?? false,
@@ -83,13 +89,16 @@ export function JobForm({ initial, onSubmit, submitLabel = "Save" }: JobFormProp
       tags: form.tags.split(",").map((t) => t.trim()).filter(Boolean),
       source_url: form.source_url.trim() || null,
       source_type: form.source_type || null,
+      source_name: form.source_name.trim() || null,
+      imported_at: form.imported_at ? new Date(form.imported_at).toISOString() : null,
+      status: form.status,
       date_posted: form.date_posted,
       expiration_date: form.expiration_date || null,
       is_jd_advantage: form.is_jd_advantage,
       is_non_practicing_attorney_role: form.is_non_practicing_attorney_role,
       is_active: form.is_active,
       featured: form.featured,
-    };
+    } as JobInsert;
     try {
       await onSubmit(payload);
     } finally {
@@ -191,6 +200,24 @@ export function JobForm({ initial, onSubmit, submitLabel = "Save" }: JobFormProp
             <SelectContent>{SOURCE_TYPES.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}</SelectContent>
           </Select>
         </div>
+
+        <div>
+          <Label htmlFor="source_name">Source name</Label>
+          <Input id="source_name" value={form.source_name} onChange={(e) => set("source_name", e.target.value)} placeholder="LinkedIn, Indeed, partner X…" />
+        </div>
+        <div>
+          <Label htmlFor="imported_at">Imported date</Label>
+          <Input id="imported_at" type="date" value={form.imported_at} onChange={(e) => set("imported_at", e.target.value)} />
+        </div>
+
+        <div>
+          <Label>Status *</Label>
+          <Select value={form.status} onValueChange={(v) => set("status", v as JobStatus)}>
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>{STATUSES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
+          </Select>
+        </div>
+        <div />
 
         <div>
           <Label htmlFor="date_posted">Posted date *</Label>
