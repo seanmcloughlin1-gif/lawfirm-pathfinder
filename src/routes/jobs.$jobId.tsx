@@ -340,7 +340,12 @@ function JobDetailPage() {
                 Applications are handled directly by {job.employer_name} on their careers site.
               </p>
               <Button className="mt-3" asChild>
-                <a href={job.source_url} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={job.source_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track("apply_clicked", { job_id: job.id, employer: job.employer_name, location: "footer" })}
+                >
                   Apply on Employer Site
                   <ExternalLink className="ml-1 h-4 w-4" />
                 </a>
