@@ -34,6 +34,7 @@ export function NewsletterSignup({ variant = "card", source }: NewsletterSignupP
       setError(result.error);
     } else {
       setSubmitted(true);
+      track("newsletter_signup", { source: source ?? variant });
     }
   }
 
