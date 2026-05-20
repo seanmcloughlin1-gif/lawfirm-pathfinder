@@ -17,21 +17,27 @@ export const Route = createFileRoute("/admin/jobs/")({
 });
 
 function AdminJobsList() {
-  const [jobs, setJobs] = useState<Tables<"jobs">[]>([]);
+  const [jobs, setJobs] = useState<JobRow[]>([]);
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<(typeof STATUS_FILTERS)[number]>("all");
   const [loading, setLoading] = useState(true);
 
   const load = () => {
     setLoading(true);
-    adminListJobs().then(setJobs).catch(() => setJobs([])).finally(() => setLoading(false));
+    adminListJobs()
+      .then((d) => setJobs(d as JobRow[]))
+      .catch(() => setJobs([]))
+      .finally(() => setLoading(false));
   };
   useEffect(() => { load(); }, []);
 
-  const filtered = jobs.filter(
-    (j) =>
+  const filtered = jobs.filter((j) => {
+    const matchesSearch =
       j.title.toLowerCase().includes(search.toLowerCase()) ||
-      j.employer_name.toLowerCase().includes(search.toLowerCase()),
-  );
+      j.employer_name.toLowerCase().includes(search.toLowerCase());
+    const matchesStatus = statusFilter === "all" || (j.status ?? "published") === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   const handleToggle = async (id: string, isActive: boolean) => {
     const { error } = await adminToggleJobActive(id, !isActive);
