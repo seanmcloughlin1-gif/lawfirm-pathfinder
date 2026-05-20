@@ -54,6 +54,7 @@ export function useSavedJobs() {
         });
         toast.error(result.error);
       } else {
+        if (!isSaved) track("job_saved", { job_id: jobId });
         toast.success(isSaved ? "Removed from saved jobs" : "Job saved");
       }
     },
