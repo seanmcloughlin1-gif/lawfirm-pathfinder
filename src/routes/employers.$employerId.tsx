@@ -66,6 +66,9 @@ export const Route = createFileRoute("/employers/$employerId")({
 
 function EmployerDetailPage() {
   const { employer, jobs } = Route.useLoaderData();
+  usePageView("employer_page_view", { employer_id: employer.id, slug: employer.slug });
+
+
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
