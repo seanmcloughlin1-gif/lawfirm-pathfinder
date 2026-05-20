@@ -5,8 +5,12 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { adminListJobs, adminDeleteJob, adminToggleJobActive } from "@/lib/admin-queries";
 import type { Tables } from "@/integrations/supabase/types";
+
+type JobRow = Tables<"jobs"> & { status?: "draft" | "published" | "expired" | "archived" | null };
+const STATUS_FILTERS = ["all", "draft", "published", "expired", "archived"] as const;
 
 export const Route = createFileRoute("/admin/jobs/")({
   component: AdminJobsList,
