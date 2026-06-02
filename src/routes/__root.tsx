@@ -40,6 +40,12 @@ export const Route = createRootRoute({
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "JD Careers — Non-Practicing Attorney & Legal Professional Jobs" },
+      { name: "twitter:title", content: "JD Careers — Non-Practicing Attorney & Legal Professional Jobs" },
+      { property: "og:description", content: "The niche job board for JD-advantage roles, legal operations, compliance, legal tech, and law firm business professionals." },
+      { name: "twitter:description", content: "The niche job board for JD-advantage roles, legal operations, compliance, legal tech, and law firm business professionals." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ed7dfd96-824e-4c02-90da-8711064277bd/id-preview-6e368a3f--ce160bf0-c2d0-40cf-a718-8a8e7e4fe87c.lovable.app-1779302999033.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ed7dfd96-824e-4c02-90da-8711064277bd/id-preview-6e368a3f--ce160bf0-c2d0-40cf-a718-8a8e7e4fe87c.lovable.app-1779302999033.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
