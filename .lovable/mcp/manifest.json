@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "sdk_version": "0.24.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "jd-careers-mcp",
+      "version": "0.1.0",
+      "title": "JD Careers"
+    },
+    "tools": [
+      {
+        "name": "search_jobs",
+        "title": "Search jobs",
+        "description": "Search the public JD Careers job board. Filter by keyword (matches title, employer, description), category, location, remote type, employment type, or JD-advantage/non-practicing-attorney flags. Returns up to 25 active, published jobs ordered by most recently posted.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "maxLength": 200,
+              "description": "Free-text keyword matched against job title, employer name, and description."
+            },
+            "category": {
+              "type": "string",
+              "maxLength": 100,
+              "description": "Job category (e.g. 'Legal Operations', 'Compliance')."
+            },
+            "location": {
+              "type": "string",
+              "maxLength": 100,
+              "description": "Location substring (e.g. 'New York', 'Remote')."
+            },
+            "remote_type": {
+              "type": "string",
+              "enum": [
+                "remote",
+                "hybrid",
+                "onsite"
+              ],
+              "description": "Filter by remote arrangement."
+            },
+            "employment_type": {
+              "type": "string",
+              "maxLength": 50,
+              "description": "Employment type (e.g. 'full-time', 'contract')."
+            },
+            "jd_advantage_only": {
+              "type": "boolean",
+              "description": "Only return jobs flagged as JD-advantage roles."
+            },
+            "non_practicing_only": {
+              "type": "boolean",
+              "description": "Only return roles designed for non-practicing attorneys."
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 25,
+              "description": "Max results (1–25, default 10)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_job",
+        "title": "Get job details",
+        "description": "Fetch a single JD Careers job listing by id, including full description, requirements, salary, tags, and the source URL to apply.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Job id returned by search_jobs."
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_employers",
+        "title": "List employers",
+        "description": "List public employers on JD Careers. Optionally filter by name substring or employer type. Returns up to 25 employers alphabetically.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "maxLength": 100,
+              "description": "Name substring to match."
+            },
+            "employer_type": {
+              "type": "string",
+              "maxLength": 50,
+              "description": "Employer type (e.g. 'law-firm', 'in-house', 'legal-tech')."
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 25,
+              "description": "Max results (1–25, default 10)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_employer",
+        "title": "Get employer details",
+        "description": "Fetch a single employer by id or slug, including description, website, headquarters, and currently active job openings at that employer.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Employer id."
+            },
+            "slug": {
+              "type": "string",
+              "maxLength": 120,
+              "description": "Employer slug (alternative to id)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

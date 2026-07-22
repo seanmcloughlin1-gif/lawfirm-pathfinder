@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForEmployersRouteImport } from './routes/for-employers'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -23,11 +24,14 @@ import { Route as EmployersIndexRouteImport } from './routes/employers.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as JobsJobIdRouteImport } from './routes/jobs.$jobId'
 import { Route as EmployersEmployerIdRouteImport } from './routes/employers.$employerId'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as AdminSubscribersIndexRouteImport } from './routes/admin.subscribers.index'
 import { Route as AdminJobsIndexRouteImport } from './routes/admin.jobs.index'
 import { Route as AdminEmployersIndexRouteImport } from './routes/admin.employers.index'
 import { Route as AdminJobsNewRouteImport } from './routes/admin.jobs.new'
 import { Route as AdminEmployersNewRouteImport } from './routes/admin.employers.new'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as AdminJobsJobIdEditRouteImport } from './routes/admin.jobs.$jobId.edit'
 import { Route as AdminEmployersEmployerIdEditRouteImport } from './routes/admin.employers.$employerId.edit'
 
@@ -39,6 +43,11 @@ const TermsRoute = TermsRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -101,6 +110,18 @@ const EmployersEmployerIdRoute = EmployersEmployerIdRouteImport.update({
   path: '/employers/$employerId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AdminSubscribersIndexRoute = AdminSubscribersIndexRouteImport.update({
   id: '/subscribers/',
   path: '/subscribers/',
@@ -126,6 +147,12 @@ const AdminEmployersNewRoute = AdminEmployersNewRouteImport.update({
   path: '/employers/new',
   getParentRoute: () => AdminRoute,
 } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AdminJobsJobIdEditRoute = AdminJobsJobIdEditRouteImport.update({
   id: '/jobs/$jobId/edit',
   path: '/jobs/$jobId/edit',
@@ -146,13 +173,17 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/for-employers': typeof ForEmployersRoute
   '/login': typeof LoginRoute
+  '/mcp': typeof McpRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/employers/$employerId': typeof EmployersEmployerIdRoute
   '/jobs/$jobId': typeof JobsJobIdRoute
   '/admin/': typeof AdminIndexRoute
   '/employers/': typeof EmployersIndexRoute
   '/jobs/': typeof JobsIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/employers/new': typeof AdminEmployersNewRoute
   '/admin/jobs/new': typeof AdminJobsNewRoute
   '/admin/employers/': typeof AdminEmployersIndexRoute
@@ -168,13 +199,17 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/for-employers': typeof ForEmployersRoute
   '/login': typeof LoginRoute
+  '/mcp': typeof McpRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/employers/$employerId': typeof EmployersEmployerIdRoute
   '/jobs/$jobId': typeof JobsJobIdRoute
   '/admin': typeof AdminIndexRoute
   '/employers': typeof EmployersIndexRoute
   '/jobs': typeof JobsIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/employers/new': typeof AdminEmployersNewRoute
   '/admin/jobs/new': typeof AdminJobsNewRoute
   '/admin/employers': typeof AdminEmployersIndexRoute
@@ -192,13 +227,17 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/for-employers': typeof ForEmployersRoute
   '/login': typeof LoginRoute
+  '/mcp': typeof McpRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/employers/$employerId': typeof EmployersEmployerIdRoute
   '/jobs/$jobId': typeof JobsJobIdRoute
   '/admin/': typeof AdminIndexRoute
   '/employers/': typeof EmployersIndexRoute
   '/jobs/': typeof JobsIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/employers/new': typeof AdminEmployersNewRoute
   '/admin/jobs/new': typeof AdminJobsNewRoute
   '/admin/employers/': typeof AdminEmployersIndexRoute
@@ -217,13 +256,17 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/for-employers'
     | '/login'
+    | '/mcp'
     | '/privacy'
     | '/terms'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/employers/$employerId'
     | '/jobs/$jobId'
     | '/admin/'
     | '/employers/'
     | '/jobs/'
+    | '/.mcp/invoke-tool/$tool'
     | '/admin/employers/new'
     | '/admin/jobs/new'
     | '/admin/employers/'
@@ -239,13 +282,17 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/for-employers'
     | '/login'
+    | '/mcp'
     | '/privacy'
     | '/terms'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/employers/$employerId'
     | '/jobs/$jobId'
     | '/admin'
     | '/employers'
     | '/jobs'
+    | '/.mcp/invoke-tool/$tool'
     | '/admin/employers/new'
     | '/admin/jobs/new'
     | '/admin/employers'
@@ -262,13 +309,17 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/for-employers'
     | '/login'
+    | '/mcp'
     | '/privacy'
     | '/terms'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/employers/$employerId'
     | '/jobs/$jobId'
     | '/admin/'
     | '/employers/'
     | '/jobs/'
+    | '/.mcp/invoke-tool/$tool'
     | '/admin/employers/new'
     | '/admin/jobs/new'
     | '/admin/employers/'
@@ -286,12 +337,16 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   ForEmployersRoute: typeof ForEmployersRoute
   LoginRoute: typeof LoginRoute
+  McpRoute: typeof McpRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   EmployersEmployerIdRoute: typeof EmployersEmployerIdRoute
   JobsJobIdRoute: typeof JobsJobIdRoute
   EmployersIndexRoute: typeof EmployersIndexRoute
   JobsIndexRoute: typeof JobsIndexRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -308,6 +363,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -394,6 +456,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EmployersEmployerIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/subscribers/': {
       id: '/admin/subscribers/'
       path: '/subscribers'
@@ -428,6 +504,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/employers/new'
       preLoaderRoute: typeof AdminEmployersNewRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/jobs/$jobId/edit': {
       id: '/admin/jobs/$jobId/edit'
@@ -478,12 +561,17 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   ForEmployersRoute: ForEmployersRoute,
   LoginRoute: LoginRoute,
+  McpRoute: McpRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   EmployersEmployerIdRoute: EmployersEmployerIdRoute,
   JobsJobIdRoute: JobsJobIdRoute,
   EmployersIndexRoute: EmployersIndexRoute,
   JobsIndexRoute: JobsIndexRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
