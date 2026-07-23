@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { JobCard } from "@/components/JobCard";
-import { EmployerCard } from "@/components/EmployerCard";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { categories } from "@/data/categories";
-import { fetchFeaturedJobs, fetchRecentJobs, fetchEmployers, type DbJob, type DbEmployer } from "@/lib/supabase-queries";
+import { fetchRecentJobs, type DbJob } from "@/lib/supabase-queries";
 import { canonical, websiteJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
