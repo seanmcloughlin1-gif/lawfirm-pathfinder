@@ -108,51 +108,6 @@ function HomePage() {
           </div>
         </section>
 
-        {/* Featured Jobs */}
-        <section className="pb-16">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="font-heading text-2xl font-bold">Featured Jobs</h2>
-              <p className="mt-1 text-sm text-muted-foreground">Hand-picked opportunities from top employers</p>
-            </div>
-            <Link to="/jobs" search={{} as any} className="hidden items-center gap-1 text-sm font-medium text-primary hover:underline sm:flex">
-              View all jobs <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-          {loading ? (
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <Card key={i}><CardContent className="h-48 animate-pulse bg-muted/50 p-5" /></Card>
-              ))}
-            </div>
-          ) : (
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {featuredJobs.map((job) => (
-                <JobCard key={job.id} job={job} />
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* Featured Employers */}
-        <section className="pb-16">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="font-heading text-2xl font-bold">Featured Employers</h2>
-              <p className="mt-1 text-sm text-muted-foreground">Leading organizations hiring legal professionals</p>
-            </div>
-            <Link to="/employers" className="hidden items-center gap-1 text-sm font-medium text-primary hover:underline sm:flex">
-              View all employers <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-          {!loading && (
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {employers.map((emp) => (
-                <EmployerCard key={emp.id} employer={emp} />
-              ))}
-            </div>
-          )}
-        </section>
 
         {/* Recent Jobs */}
         <section className="pb-16">
