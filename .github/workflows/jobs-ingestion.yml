@@ -27,11 +27,11 @@ jobs:
 
       - name: Check required secrets
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL || vars.SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL || vars.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_URL: https://bytkqocifzbcykiqbqwd.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           if [ -z "$SUPABASE_URL" ]; then
-            echo "::error::Missing Supabase URL. Add a Repository secret or variable named SUPABASE_URL, or NEXT_PUBLIC_SUPABASE_URL."
+            echo "::error::Missing Supabase URL."
             exit 1
           fi
           if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
@@ -42,7 +42,7 @@ jobs:
       - name: Run Supabase ingestion
         env:
           INGEST_WRITE: "true"
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL || vars.SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL || vars.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_URL: https://bytkqocifzbcykiqbqwd.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: npm run ingest:supabase
 
