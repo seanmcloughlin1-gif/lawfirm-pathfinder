@@ -33,18 +33,12 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [featuredJobs, setFeaturedJobs] = useState<DbJob[]>([]);
   const [recentJobs, setRecentJobs] = useState<DbJob[]>([]);
-  const [employers, setEmployers] = useState<DbEmployer[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([fetchFeaturedJobs(), fetchRecentJobs(), fetchEmployers()])
-      .then(([fj, rj, emp]) => {
-        setFeaturedJobs(fj);
-        setRecentJobs(rj);
-        setEmployers(emp.slice(0, 6));
-      })
+    fetchRecentJobs()
+      .then((jobs) => setRecentJobs(jobs))
       .finally(() => setLoading(false));
   }, []);
 
