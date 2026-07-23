@@ -20,6 +20,9 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Ingestion dry-run output
+ingestion/reports/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

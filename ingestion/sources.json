@@ -1,0 +1,250 @@
+[
+  {
+    "enabled": true,
+    "company": "Kirkland & Ellis",
+    "employerSlug": "kirkland-ellis",
+    "careersUrl": "https://staffjobsus.kirkland.com/jobs/search/?q=&location_city=&sort_by=cfml10%2Cdesc",
+    "adapter": "custom-html",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "Latham & Watkins",
+    "employerSlug": "latham-watkins",
+    "careersUrl": "https://careers-lw.icims.com/jobs/search?hashed=-625915638&mobile=false&width=1519&height=500&bga=true&needsRedirect=false&jan1offset=-300&jun1offset=-240",
+    "adapter": "icims",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "Clifford Chance",
+    "employerSlug": "clifford-chance",
+    "careersUrl": "https://jobs.cliffordchance.com/jobs?options=58&page=1",
+    "adapter": "custom-html",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "Hogan Lovells",
+    "employerSlug": "hogan-lovells",
+    "careersUrl": "https://hoganlovells.wd3.myworkdayjobs.com/Search?locationCountry=bc33aa3152ec42d4995f4791a106ed09",
+    "adapter": "workday",
+    "country": "US",
+    "workday": {
+      "tenant": "hoganlovells",
+      "site": "Search"
+    }
+  },
+  {
+    "enabled": true,
+    "company": "Sidley Austin",
+    "employerSlug": "sidley-austin",
+    "careersUrl": "https://sidley.wd501.myworkdayjobs.com/en-US/US",
+    "adapter": "workday",
+    "country": "US",
+    "workday": {
+      "tenant": "sidley",
+      "site": "US"
+    }
+  },
+  {
+    "enabled": true,
+    "company": "Davis Polk & Wardwell",
+    "employerSlug": "davis-polk-wardwell",
+    "careersUrl": "https://davispolk.wd5.myworkdayjobs.com/business-professionals-services-usa",
+    "adapter": "workday",
+    "country": "US",
+    "workday": {
+      "tenant": "davispolk",
+      "site": "business-professionals-services-usa"
+    }
+  },
+  {
+    "enabled": true,
+    "company": "McDermott, Will & Schulte",
+    "employerSlug": "mcdermott-will-schulte",
+    "careersUrl": "https://www.mcdermottlaw.com/careers/open-roles/",
+    "adapter": "custom-html",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "Cooley",
+    "employerSlug": "cooley",
+    "careersUrl": "https://cooley.wd1.myworkdayjobs.com/Cooley_US_LLP",
+    "adapter": "workday",
+    "country": "US",
+    "workday": {
+      "tenant": "cooley",
+      "site": "Cooley_US_LLP"
+    }
+  },
+  {
+    "enabled": true,
+    "company": "Milbank",
+    "employerSlug": "milbank",
+    "careersUrl": "https://careers-milbank.icims.com/jobs/search?ss=1&hashed=-435594439",
+    "adapter": "icims",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "Greenberg Traurig",
+    "employerSlug": "greenberg-traurig",
+    "careersUrl": "https://gtlaw.wd1.myworkdayjobs.com/GTLAW",
+    "adapter": "workday",
+    "country": "US",
+    "workday": {
+      "tenant": "gtlaw",
+      "site": "GTLAW"
+    }
+  },
+  {
+    "enabled": true,
+    "company": "Morrison & Foerster",
+    "employerSlug": "morrison-foerster",
+    "careersUrl": "https://mofo.career.page/business-professionals/jobs",
+    "adapter": "custom-html",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "Fenwick & West",
+    "employerSlug": "fenwick-west",
+    "careersUrl": "https://fenwick.wd1.myworkdayjobs.com/Fenwick_External_Careers",
+    "adapter": "workday",
+    "country": "US",
+    "workday": {
+      "tenant": "fenwick",
+      "site": "Fenwick_External_Careers"
+    }
+  },
+  {
+    "enabled": true,
+    "company": "Cozen O'Connor",
+    "employerSlug": "cozen-oconnor",
+    "careersUrl": "https://hctq.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?lastSelectedFacet=LOCATIONS&selectedLocationsFacet=300000000345520",
+    "adapter": "oracle",
+    "country": "US",
+    "oracle": {
+      "siteNumber": "CX_1",
+      "lastSelectedFacet": "LOCATIONS",
+      "selectedLocationsFacet": "300000000345520"
+    }
+  },
+  {
+    "enabled": true,
+    "company": "Jackson Lewis",
+    "employerSlug": "jackson-lewis",
+    "careersUrl": "https://jacksonlewis.wd1.myworkdayjobs.com/JacksonLewisBusinessandLegalProfessionalsCareers",
+    "adapter": "workday",
+    "country": "US",
+    "workday": {
+      "tenant": "jacksonlewis",
+      "site": "JacksonLewisBusinessandLegalProfessionalsCareers"
+    }
+  },
+  {
+    "enabled": true,
+    "company": "DLA Piper",
+    "employerSlug": "dla-piper",
+    "careersUrl": "https://dlapiper.wd1.myworkdayjobs.com/dlapiper",
+    "adapter": "workday",
+    "country": "US",
+    "workday": {
+      "tenant": "dlapiper",
+      "site": "dlapiper"
+    }
+  },
+  {
+    "enabled": true,
+    "company": "Harvey",
+    "employerSlug": "harvey",
+    "careersUrl": "https://www.harvey.ai/careers",
+    "adapter": "custom-html",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "Legora",
+    "employerSlug": "legora",
+    "careersUrl": "https://jobs.ashbyhq.com/legora",
+    "adapter": "ashby",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "LegalZoom",
+    "employerSlug": "legalzoom",
+    "careersUrl": "https://jobs.jobvite.com/legalzoom/jobs",
+    "adapter": "jobvite",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "Clio",
+    "employerSlug": "clio",
+    "careersUrl": "https://clio.wd3.myworkdayjobs.com/ClioCareerSite",
+    "adapter": "workday",
+    "country": "US",
+    "workday": {
+      "tenant": "clio",
+      "site": "ClioCareerSite"
+    }
+  },
+  {
+    "enabled": true,
+    "company": "Akerman",
+    "employerSlug": "akerman",
+    "careersUrl": "https://recruiting.ultipro.com/AKE1000ASEPA/JobBoard",
+    "adapter": "custom-html",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "Norm AI",
+    "employerSlug": "norm-ai",
+    "careersUrl": "https://jobs.ashbyhq.com/norm-ai",
+    "adapter": "ashby",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "Proof",
+    "employerSlug": "proof",
+    "careersUrl": "https://jobs.lever.co/proof",
+    "adapter": "lever",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "Litera",
+    "employerSlug": "litera",
+    "careersUrl": "https://litera.wd12.myworkdayjobs.com/Litera_Careers",
+    "adapter": "workday",
+    "country": "US",
+    "workday": {
+      "tenant": "litera",
+      "site": "Litera_Careers"
+    }
+  },
+  {
+    "enabled": true,
+    "company": "Draftable",
+    "employerSlug": "draftable",
+    "careersUrl": "https://www.draftable.com/careers",
+    "adapter": "custom-html",
+    "country": "US"
+  },
+  {
+    "enabled": true,
+    "company": "LinkSquares",
+    "employerSlug": "linksquares",
+    "careersUrl": "https://job-boards.greenhouse.io/linksquareslinkedin",
+    "adapter": "greenhouse",
+    "country": "US",
+    "greenhouse": {
+      "boardToken": "linksquareslinkedin"
+    }
+  }
+]

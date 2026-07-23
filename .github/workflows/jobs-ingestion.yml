@@ -1,0 +1,40 @@
+name: Jobs ingestion
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 10 * * 1"
+
+concurrency:
+  group: jobs-ingestion
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    name: Ingest jobs into Supabase
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Run Supabase ingestion
+        env:
+          INGEST_WRITE: "true"
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: npm run ingest:supabase
+
+      - name: Upload ingestion report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jobs-ingestion-report
+          path: ingestion/reports/latest-live.json
+          if-no-files-found: ignore
